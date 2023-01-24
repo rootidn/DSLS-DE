@@ -1,0 +1,77 @@
+﻿1;Chai;39;0;10;0;Beverages;80;21;1,7;36
+2;Chang;17;40;25;0;Beverages;100;24;2;48
+3;Aniseed Syrup;13;70;25;0;Condiments;60;27;0,5;14
+4;Chef Anton's Cajun Seasoning;53;0;0;0;Condiments;50;22;0,9;20
+5;Chef Anton's Gumbo Mix;0;0;0;1;Condiments;70;29;0,5;15
+6;Grandma's Boysenberry Spread;120;0;25;0;Condiments;70;25;0,5;13
+7;Uncle Bob's Organic Dried Pears;15;0;10;0;Produce;90;26;1,3;34
+8;Northwoods Cranberry Sauce;6;0;0;0;Condiments;70;28;0,6;17
+9;Mishi Kobe Niku;29;0;0;1;Meat/Poultry;50;19;0,2;4
+10;Ikura;31;0;0;0;Seafood;100;22;1,5;33
+11;Queso Cabrales;22;30;30;0;Dairy Products;50;18;1,7;31
+12;Queso Manchego La Pastora;86;0;0;0;Dairy Products;100;24;0,6;14
+13;Konbu;24;0;5;0;Seafood;84;22;1,8;40
+14;Tofu;35;0;0;0;Produce;70;18;1;18
+15;Genen Shouyu;39;0;5;0;Condiments;50;20;0,3;6
+16;Pavlova;29;0;10;0;Confections;65;26;2;52
+17;Alice Mutton;0;0;0;1;Meat/Poultry;100;26;1,7;44
+18;Carnarvon Tigers;42;0;0;0;Seafood;50;19;1,2;23
+19;Teatime Chocolate Biscuits;25;0;5;0;Confections;80;19;1,7;32
+20;Sir Rodney's Marmalade;40;0;0;0;Confections;50;19;0,7;13
+21;Sir Rodney's Scones;3;40;5;0;Confections;65;26;1,8;47
+22;Gustaf's Knäckebröd;104;0;25;0;Grains/Cereals;52;24;0,6;14
+23;Tunnbröd;61;0;25;0;Grains/Cereals;70;29;0,9;26
+24;Guaraná Fantástica;20;0;0;1;Beverages;110;22;2,3;51
+25;NuNuCa Nuß-Nougat-Creme;76;0;30;0;Confections;60;17;0,8;14
+26;Gumbär Gummibärchen;15;0;0;0;Confections;70;23;1,5;35
+27;Schoggi Schokolade;49;0;30;0;Confections;120;40;0,4;16
+28;Rössle Sauerkraut;26;0;0;1;Produce;70;19;1,5;29
+29;Thüringer Rostbratwurst;0;0;0;1;Meat/Poultry;80;23;1,5;35
+30;Nord-Ost Matjeshering;10;0;15;0;Seafood;60;19;1,5;29
+31;Gorgonzola Telino;0;70;20;0;Dairy Products;70;27;2,3;62
+32;Mascarpone Fabioli;9;40;25;0;Dairy Products;50;19;0,7;13
+33;Geitost;112;0;20;0;Dairy Products;60;23;1,5;35
+34;Sasquatch Ale;111;0;15;0;Beverages;90;26;0,9;23
+35;Steeleye Stout;20;0;15;0;Beverages;100;24;1,6;38
+36;Inlagd Sill;112;0;20;0;Seafood;60;25;1,4;35
+37;Gravad lax;11;50;25;0;Seafood;60;20;0,3;6
+38;Côte de Blaye;17;0;15;0;Beverages;60;25;1,1;28
+39;Chartreuse verte;69;0;5;0;Beverages;130;26;1,4;36
+40;Boston Crab Meat;123;0;30;0;Seafood;91;26;1,9;49
+41;Jack's New England Clam Chowder;85;0;10;0;Seafood;120;20;2,1;42
+42;Singaporean Hokkien Fried Mee;26;0;0;1;Grains/Cereals;100;23;1,4;32
+43;Ipoh Coffee;17;10;25;0;Beverages;60;20;1,3;26
+44;Gula Malacca;27;0;15;0;Condiments;100;25;1,1;28
+45;Rogede sild;5;70;15;0;Seafood;110;36;0,6;22
+46;Spegesild;95;0;0;0;Seafood;60;20;1,2;24
+47;Zaanse koeken;36;0;0;0;Confections;55;23;1;23
+48;Chocolade;15;70;25;0;Confections;70;23;0,3;7
+49;Maxilaku;10;60;15;0;Confections;60;24;1;24
+50;Valkoinen suklaa;65;0;30;0;Confections;40;23;0,5;12
+51;Manjimup Dried Apples;20;0;10;0;Produce;120;22;1,8;40
+52;Filo Mix;38;0;25;0;Grains/Cereals;70;17;1,3;22
+53;Perth Pasties;0;0;0;1;Meat/Poultry;120;24;1,4;34
+54;Tourtière;21;0;10;0;Meat/Poultry;80;20;1,6;32
+55;Pâté chinois;115;0;20;0;Meat/Poultry;120;27;1,5;41
+56;Gnocchi di nonna Alice;21;10;30;0;Grains/Cereals;70;25;2,3;57
+57;Ravioli Angelo;36;0;20;0;Grains/Cereals;50;18;1;18
+58;Escargots de Bourgogne;62;0;20;0;Seafood;80;29;0,8;23
+59;Raclette Courdavault;79;0;0;0;Dairy Products;110;27;2,5;68
+60;Camembert Pierrot;19;0;0;0;Dairy Products;100;30;2,3;69
+61;Sirop d'érable;113;0;25;0;Condiments;120;25;1,1;28
+62;Tarte au sucre;17;0;0;0;Confections;80;22;2,2;48
+63;Vegie-spread;24;0;5;0;Condiments;80;26;0,8;21
+64;Wimmers gute Semmelknödel;22;80;30;0;Grains/Cereals;130;24;1,4;34
+65;Louisiana Fiery Hot Pepper Sauce;76;0;0;0;Condiments;80;23;1,5;35
+66;Louisiana Hot Spiced Okra;4;100;20;0;Condiments;60;29;0,4;12
+67;Laughing Lumberjack Lager;52;0;10;0;Beverages;40;18;0,5;9
+68;Scottish Longbreads;6;10;15;0;Confections;80;23;1,5;35
+69;Gudbrandsdalsost;26;0;15;0;Dairy Products;65;23;1,4;32
+70;Outback Lager;15;10;30;0;Beverages;60;20;1,8;36
+71;Flotemysost;26;0;0;0;Dairy Products;60;25;1,9;48
+72;Mozzarella di Giovanni;14;0;0;0;Dairy Products;60;21;1,7;36
+73;Röd Kaviar;101;0;5;0;Seafood;50;20;0,6;12
+74;Longlife Tofu;4;20;5;0;Produce;50;22;0,6;13
+75;Rhönbräu Klosterbier;125;0;25;0;Beverages;120;25;2,1;53
+76;Lakkalikööri;57;0;20;0;Beverages;90;25;1,8;45
+77;Original Frankfurter grüne Soße;32;0;15;0;Condiments;70;20;1,7;34

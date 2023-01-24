@@ -1,0 +1,202 @@
+--1) PRODUCT ANALYSIS
+
+--Naik turunnya sales per kategori per bulan (per produk bisa gk?)
+--5 Produk yang memiliki sales tertinggi di tiap tahunnya
+--target: mengetahui waktu yang tepat untuk promosi dan meningkatkan persediaan produk
+
+--SELECT Orders.OrderDate, OrderDetails.*
+--	FROM Northwind.dbo.Orders as Orders
+--	LEFT JOIN(
+--	SELECT OrderDetails.OrderID, Products.ProductName, Products.CategoryName, OrderDetails.Quantity, OrderDetails.UnitPrice, OrderDetails.Quantity*OrderDetails.UnitPrice AS Sales
+--		FROM Northwind.dbo.[Order Details] as OrderDetails
+--		LEFT JOIN(
+--			SELECT Products.ProductID, ProductName, Categories.CategoryName
+--			FROM Northwind.dbo.Products as Products
+--			LEFT JOIN (
+--				SELECT Categories.CategoryID, Categories.CategoryName
+--				FROM Northwind.dbo.Categories as Categories
+--			) as Categories
+--			ON Products.CategoryID = Categories.CategoryID
+--		) as Products
+--		On OrderDetails.ProductID = Products.ProductID
+--	) as OrderDetails
+--	ON Orders.OrderID = OrderDetails.OrderID;
+
+--Analisis Unit: InStock, OnOrder, ReorderLevel, Discontuined
+--target: mengetahui mana produk yang dapat ditambah stoknya
+--AVG jumlah order perbulan
+
+--SELECT Products.ProductID, ProductName, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued, Categories.CategoryName,
+--	OrderDetails.MaxQuantityPerOrder, OrderDetails.AVGQuantityPerOrder, OrderDetails.OrderPerMonth,
+--	ROUND(AVGQuantityPerOrder*OrderPerMonth, 0) as TotalOrderInMonth
+--	FROM Northwind.dbo.Products as Products
+--	LEFT JOIN (
+--		SELECT ProductID, MAX(Quantity) as MaxQuantityPerOrder, AVG(Quantity) as AVGQuantityPerOrder,
+--		ROUND(CAST(COUNT(ProductDetails.ProductID) as float)/AVG(ProductDetails.MonthNum), 1) as OrderPerMonth 
+--		FROM
+--		(
+--			SELECT ProductID, Quantity,
+--				(SELECT DATEDIFF(month, MIN(MaxDate.OrderDate), MAX(MaxDate.OrderDate)) FROM (SELECT OrderDate FROM Northwind.dbo.Orders) as MaxDate) as MonthNum
+--			FROM Northwind.dbo.[Order Details]
+--		) as ProductDetails
+--		GROUP BY ProductID
+--	) as OrderDetails
+--	ON Products.ProductID = OrderDetails.ProductID
+--	LEFT JOIN (
+--		SELECT CategoryID, CategoryName
+--		FROM Northwind.dbo.Categories
+--	) as Categories
+--	ON Products.CategoryID = Categories.CategoryID;
+
+--=======================================
+--2) CUSTOMER ANALYSIS
+--Analisis RFM 
+--Update: edit last 1 year, tampilkan CompanyName
+
+--SELECT *, NTILE(3) OVER (ORDER BY Recency DESC) as R_Rank,
+--	NTILE(3) OVER (ORDER BY Frequency ASC) as F_Rank,
+--	NTILE(3) OVER (ORDER BY Monetery ASC) as M_Rank
+--FROM (
+--	SELECT CustomerData2.CustomerID, Customers.Country, MostRecentOrderDate, MaxDate,
+--	DATEDIFF(day, MostRecentOrderDate, MaxDate) as Recency, CountOrder as Frequency, TotalSales as Monetery
+--	FROM
+--	(
+--		SELECT CustomerID, MAX(OrderDate) as MostRecentOrderDate,  COUNT(OrderID) as CountOrder, SUM(Sales) as TotalSales
+--			, (SELECT MAX(MaxDate.OrderDate) FROM (SELECT OrderDate FROM Northwind.dbo.Orders) as MaxDate) as MaxDate
+--			FROM (
+--			SELECT Orders.OrderID, CustomerID, Sales, OrderDate
+--				FROM Northwind.dbo.Orders as Orders
+--				LEFT JOIN 
+--				(
+--					SELECT OrderID, SUM(Quantity*UnitPrice) as Sales FROM Northwind.dbo.[Order Details] GROUP BY OrderID
+--				) as OrderDetails
+--				ON Orders.OrderID = OrderDetails.OrderID
+--		) as CustomerData
+--		GROUP BY CustomerID
+--	) as CustomerData2
+--	LEFT JOIN
+--	(
+--	SELECT CustomerID, Country
+--	FROM Northwind.dbo.Customers
+--	) as Customers
+--	ON CustomerData2.CustomerID = Customers.CustomerID
+--) as RFMAnaysis;
+
+--Negara customer dengan sales terbanyak
+
+--SELECT SalesCountry.Country, SalesCountry.City, SUM(SalesCountry.Sales) as TotalSales FROM
+--(
+--	SELECT Orders.OrderID, Customers.CustomerID, Customers.Country, Customers.City, Sales
+--	FROM Northwind.dbo.Orders 
+--	LEFT JOIN
+--	(
+--	SELECT * FROM Northwind.dbo.Customers
+--	) as Customers
+--	ON Orders.CustomerID = Customers.CustomerID
+--	LEFT JOIN
+--	(
+--		SELECT OrderID, SUM(UnitPrice*Quantity) as Sales FROM Northwind.dbo.[Order Details]
+--		GROUP BY OrderID
+--	) as OrderDetails
+--	ON Orders.OrderID = OrderDetails.OrderID
+--) as SalesCountry
+--GROUP BY SalesCountry.Country, SalesCountry.City
+--ORDER BY TotalSales DESC;
+
+--=====================================
+--3) Supplier Analysis
+--Total Sales berdasarkan supplier (grouping by product category)
+--3 top sales supplier per kategori
+
+--SELECT SupplierProducts.OrderID, Orders.OrderDate, ProductID, CategoryName, SupplierID, CompanyName, Country, Sales, ShipCountry
+--FROM Northwind.dbo.Orders
+--RIGHT JOIN
+--(
+--	SELECT OrderDetails.OrderID,OrderDetails.ProductID, ProductName, 
+--	CategoryName, SupplierID, CompanyName, Country, UnitPrice*Quantity as Sales
+--	FROM Northwind.dbo.[Order Details] as OrderDetails
+--	LEFT JOIN
+--	(
+--		SELECT Products.ProductID, Suppliers.CompanyName, Suppliers.SupplierID, Categories.CategoryName, ProductName, Country
+--		FROM Northwind.dbo.Products
+--		LEFT JOIN
+--		(
+--			SELECT CategoryID, CategoryName
+--			FROM Northwind.dbo.Categories
+--		) as Categories
+--		ON Products.CategoryID = Categories.CategoryID
+--		LEFT JOIN 
+--		(
+--			SELECT SupplierID, CompanyName, Country
+--			FROM Northwind.dbo.Suppliers
+--		) as Suppliers
+--		ON Products.SupplierID = Suppliers.SupplierID
+--	) as SupplierProduct
+--	ON OrderDetails.ProductID = SupplierProduct.ProductID
+--) as SupplierProducts
+--ON Orders.OrderID = SupplierProducts.OrderID;
+
+
+
+
+--supplier negara basis customer
+--SELECT Details.OrderID, ProductID, CategoryName, SupplierID, CompanyName, Country, CustomerID, ShipCountry
+--FROM Northwind.dbo.Orders
+--RIGHT JOIN
+--(
+--	SELECT OrderDetails.OrderID, OrderDetails.ProductID, CategoryName, SupplierID, CompanyName, Country
+--		FROM Northwind.dbo.[Order Details] as OrderDetails
+--		LEFT JOIN
+--		(
+--			SELECT Products.ProductID, CategoryName, Products.SupplierID, CompanyName, Country
+--			FROM Northwind.dbo.Products
+--			INNER JOIN
+--			(
+--				SELECT SupplierID, CompanyName, Country
+--				FROM Northwind.dbo.Suppliers
+--			) as Suppliers
+--			ON Products.SupplierID = Suppliers.SupplierID
+--			LEFT JOIN
+--			(
+--				SELECT CategoryID, CategoryName
+--				FROM Northwind.dbo.Categories
+--			) as Categories
+--			ON Products.CategoryID = Categories.CategoryID
+--		) as Products
+--		ON OrderDetails.ProductID = Products.ProductID
+--) as Details
+--ON Orders.OrderID = Details.OrderID;
+
+--supplier dan shipper
+--SELECT Details.OrderID, ProductID, CategoryName, SupplierID, Details.CompanyName, Country, CustomerID, ShipCountry, ShipVia, Shippers.CompanyName
+--FROM Northwind.dbo.Orders
+--RIGHT JOIN
+--(
+--	SELECT OrderDetails.OrderID, OrderDetails.ProductID, CategoryName, SupplierID, CompanyName, Country
+--		FROM Northwind.dbo.[Order Details] as OrderDetails
+--		LEFT JOIN
+--		(
+--			SELECT Products.ProductID, CategoryName, Products.SupplierID, CompanyName, Country
+--			FROM Northwind.dbo.Products
+--			INNER JOIN
+--			(
+--				SELECT SupplierID, CompanyName, Country
+--				FROM Northwind.dbo.Suppliers
+--			) as Suppliers
+--			ON Products.SupplierID = Suppliers.SupplierID
+--			LEFT JOIN
+--			(
+--				SELECT CategoryID, CategoryName
+--				FROM Northwind.dbo.Categories
+--			) as Categories
+--			ON Products.CategoryID = Categories.CategoryID
+--		) as Products
+--		ON OrderDetails.ProductID = Products.ProductID
+--) as Details
+--ON Orders.OrderID = Details.OrderID
+--LEFT JOIN 
+--(
+--	SELECT *
+--	FROM Northwind.dbo.Shippers
+--) as Shippers
+--On Orders.ShipVia = Shippers.ShipperID;
